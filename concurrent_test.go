@@ -14,11 +14,13 @@ func TestWithChildrenConcurrentSafety(t *testing.T) {
 	child := templ.ComponentFunc(func(ctx context.Context, w io.Writer) error { return nil })
 
 	var wg sync.WaitGroup
-	for range 50 {
-		wg.Go(func() {
+	for i := 0; i < 50; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
 			newCtx := templ.WithChildren(ctx, child)
 			_ = templ.GetChildren(newCtx)
-		})
+		}()
 	}
 	wg.Wait()
 }

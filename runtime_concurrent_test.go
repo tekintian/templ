@@ -57,10 +57,12 @@ func TestConcurrentContextThreadSafety(t *testing.T) {
 			var wg sync.WaitGroup
 			errs := make([]error, 10)
 
-			for i := range 10 {
-				wg.Go(func() {
-					errs[i] = tt.render(ctx)
-				})
+			for i := 0; i < 10; i++ {
+				wg.Add(1)
+				go func(idx int) {
+					defer wg.Done()
+					errs[idx] = tt.render(ctx)
+				}(i)
 			}
 
 			wg.Wait()
@@ -85,15 +87,17 @@ func TestConcurrentDeduplication(t *testing.T) {
 		outputs := make([]string, 10)
 		errs := make([]error, 10)
 
-		for i := range 10 {
-			wg.Go(func() {
+		for i := 0; i < 10; i++ {
+			wg.Add(1)
+			go func(idx int) {
+				defer wg.Done()
 				var buf bytes.Buffer
 				if err := templ.RenderScriptItems(ctx, &buf, script); err != nil {
-					errs[i] = err
+					errs[idx] = err
 					return
 				}
-				outputs[i] = buf.String()
-			})
+				outputs[idx] = buf.String()
+			}(i)
 		}
 
 		wg.Wait()
@@ -127,15 +131,17 @@ func TestConcurrentDeduplication(t *testing.T) {
 		outputs := make([]string, 10)
 		errs := make([]error, 10)
 
-		for i := range 10 {
-			wg.Go(func() {
+		for i := 0; i < 10; i++ {
+			wg.Add(1)
+			go func(idx int) {
+				defer wg.Done()
 				var buf bytes.Buffer
 				if err := templ.RenderCSSItems(ctx, &buf, cssClass); err != nil {
-					errs[i] = err
+					errs[idx] = err
 					return
 				}
-				outputs[i] = buf.String()
-			})
+				outputs[idx] = buf.String()
+			}(i)
 		}
 
 		wg.Wait()
@@ -168,15 +174,17 @@ func TestConcurrentDeduplication(t *testing.T) {
 		outputs := make([]string, 10)
 		errs := make([]error, 10)
 
-		for i := range 10 {
-			wg.Go(func() {
+		for i := 0; i < 10; i++ {
+			wg.Add(1)
+			go func(idx int) {
+				defer wg.Done()
 				var buf bytes.Buffer
 				if err := onceComponent.Render(ctx, &buf); err != nil {
-					errs[i] = err
+					errs[idx] = err
 					return
 				}
-				outputs[i] = buf.String()
-			})
+				outputs[idx] = buf.String()
+			}(i)
 		}
 
 		wg.Wait()

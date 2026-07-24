@@ -138,7 +138,8 @@ func TestCompletion(t *testing.T) {
 			// Give CI/CD pipeline executors some time because they're often quite slow.
 			var ok bool
 			var msg string
-			for range 3 {
+			for i := 0; i < 3; i++ {
+				_ = i
 				actual, err := server.Completion(ctx, &protocol.CompletionParams{
 					Context: &protocol.CompletionContext{
 						TriggerCharacter: ".",
@@ -290,7 +291,8 @@ func TestHover(t *testing.T) {
 			// Give CI/CD pipeline executors some time because they're often quite slow.
 			var ok bool
 			var msg string
-			for range 3 {
+			for i := 0; i < 3; i++ {
+				_ = i
 				lspCharIndex, err := runeIndexToUTF8ByteIndex(test.replacement, len(test.cursor)-1)
 				if err != nil {
 					t.Error(err)
@@ -457,7 +459,8 @@ func TestReferences(t *testing.T) {
 			// Give CI/CD pipeline executors some time because they're often quite slow.
 			var ok bool
 			var msg string
-			for range 3 {
+			for j := 0; j < 3; j++ {
+				_ = j
 				if err != nil {
 					t.Error(err)
 					return
@@ -583,7 +586,8 @@ func TestCodeAction(t *testing.T) {
 			// Give CI/CD pipeline executors some time because they're often quite slow.
 			var ok bool
 			var msg string
-			for range 3 {
+			for i := 0; i < 3; i++ {
+				_ = i
 				lspCharIndex, err := runeIndexToUTF8ByteIndex(test.replacement, len(test.cursor)-1)
 				if err != nil {
 					t.Error(err)
@@ -818,7 +822,8 @@ func TestFormatting(t *testing.T) {
 
 			log.Info("Calling Formatting")
 			var edits []protocol.TextEdit
-			for range 3 {
+			for i := 0; i < 3; i++ {
+				_ = i
 				edits, err = server.Formatting(ctx, &protocol.DocumentFormattingParams{
 					TextDocument: protocol.TextDocumentIdentifier{
 						URI: uri.URI("file://" + appDir + "/formatting.templ"),

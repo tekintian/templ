@@ -1,6 +1,6 @@
 module github.com/a-h/templ/examples/counter
 
-go 1.25.0
+go 1.24.0
 
 require (
 	github.com/a-h/templ v0.2.234-0.20230427112944-80f0dc03a8a8
@@ -42,10 +42,10 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/yuin/goldmark v1.7.4 // indirect
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
-	golang.org/x/mod v0.26.0 // indirect
-	golang.org/x/sync v0.16.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
-	golang.org/x/tools v0.35.0 // indirect
+	golang.org/x/mod v0.23.0 // indirect
+	golang.org/x/sync v0.11.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/tools v0.29.0 // indirect
 )
 
 replace github.com/a-h/templ => ../../

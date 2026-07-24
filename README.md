@@ -4,10 +4,46 @@
 
 ![templ](ide-demo.gif)
 
+> **Note: This is a fork of [a-h/templ](https://github.com/a-h/templ) adapted for Go 1.24**
+> 
+> The `go1.24` branch downgrades the Go version requirement from 1.25 to 1.24 and fixes related compatibility issues.
 
 ## Documentation
 
 See user documentation at https://templ.guide
+
+## Go 1.24 Version Usage
+
+### Installation
+
+```bash
+go get github.com/tekintian/templ@go1.24
+```
+
+Or use replace in your `go.mod`:
+
+```go
+require github.com/a-h/templ v0.3.833
+
+replace github.com/a-h/templ => github.com/tekintian/templ go1.24
+```
+
+### Compatibility Changes
+
+This branch makes the following modifications to support Go 1.24:
+
+1. **Go version downgrade**: `go 1.25.0` → `go 1.24.0`
+2. **Dependency downgrade**: `golang.org/x/*` packages downgraded to Go 1.24 compatible versions
+3. **Syntax fixes**:
+   - `sync.WaitGroup.Go()` (Go 1.25+) → traditional `go func() + wg.Add/Done`
+   - `for range N` (Go 1.25+) → `for i := 0; i < N; i++`
+
+### Branch Information
+
+| Branch | Go Version | Description |
+|--------|------------|-------------|
+| `main` | 1.25+ | Upstream original version |
+| `go1.24` | 1.24+ | **This branch, Go 1.24 compatible version** |
 
 <p align="center">
 <a href="https://pkg.go.dev/github.com/a-h/templ"><img src="https://pkg.go.dev/badge/github.com/a-h/templ.svg" alt="Go Reference" /></a>
@@ -191,4 +227,3 @@ Directory: docs
 ```sh
 npm run build
 ```
-

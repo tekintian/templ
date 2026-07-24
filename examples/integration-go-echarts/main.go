@@ -13,7 +13,7 @@ import (
 
 func generateBarItems() []opts.BarData {
 	items := make([]opts.BarData, 0)
-	for range 7 {
+	for i := 0; i < 7; i++ {
 		items = append(items, opts.BarData{Value: rand.Intn(300)})
 	}
 	return items

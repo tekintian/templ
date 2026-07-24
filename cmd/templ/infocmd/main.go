@@ -150,18 +150,23 @@ func getInfo() (d Info) {
 	d.OS.GOARCH = runtime.GOARCH
 
 	var wg sync.WaitGroup
-	wg.Go(func() {
+	wg.Add(4)
+	go func() {
+		defer wg.Done()
 		d.Go = getGoInfo()
-	})
-	wg.Go(func() {
+	}()
+	go func() {
+		defer wg.Done()
 		d.Gopls = getGoplsInfo()
-	})
-	wg.Go(func() {
+	}()
+	go func() {
+		defer wg.Done()
 		d.Templ = getTemplInfo()
-	})
-	wg.Go(func() {
+	}()
+	go func() {
+		defer wg.Done()
 		d.Prettier = getPrettierInfo()
-	})
+	}()
 	wg.Wait()
 	return
 }
