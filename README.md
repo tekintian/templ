@@ -16,8 +16,14 @@ See user documentation at https://templ.guide
 
 ### Installation
 
+**International (GitHub):**
 ```bash
 go get github.com/tekintian/templ@go1.24
+```
+
+**China Mainland (Gitee - faster access):**
+```bash
+go get gitee.com/tekintian/templ@go1.24
 ```
 
 Or use replace in your `go.mod`:
@@ -25,7 +31,11 @@ Or use replace in your `go.mod`:
 ```go
 require github.com/a-h/templ v0.3.833
 
+// International
 replace github.com/a-h/templ => github.com/tekintian/templ go1.24
+
+// China Mainland
+replace github.com/a-h/templ => gitee.com/tekintian/templ go1.24
 ```
 
 ### Compatibility Changes
